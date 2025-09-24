@@ -1,5 +1,5 @@
 import { IconButtonProps } from "@/types/IconButton"
-import { SiBlender, SiC, SiCss3, SiGodotengine, SiHtml5, SiJavascript, SiLua, SiNextdotjs, SiPostgresql, SiPython, SiReact, SiRobloxstudio, SiTailwindcss, SiTypescript } from "react-icons/si"
+import { SiBlender, SiC, SiCss3, SiGodotengine, SiHtml5, SiJavascript, SiLua, SiPython, SiReact, SiRobloxstudio, SiTailwindcss, SiTypescript } from "react-icons/si"
 
 
 export const webStack: IconButtonProps[] = [
@@ -39,19 +39,7 @@ export const webStack: IconButtonProps[] = [
         link: "https://react.dev/",
         icon: SiReact,
         className: "text-[#61DAFB]"
-    },
-    {
-        name: "Next.js",
-        link: "https://nextjs.org/",
-        icon: SiNextdotjs,
-        className: "text-[#FFFFFF]" 
-    },
-    {
-        name: "PostgreSQL",
-        link: "https://www.postgresql.org/",
-        icon: SiPostgresql,
-        className: "text-[#336791]" 
-    },
+    }
 ]
 
 export const gameDevStack: IconButtonProps[] = [
