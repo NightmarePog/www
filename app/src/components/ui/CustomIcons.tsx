@@ -17,7 +17,7 @@ const CustomLogo = ({ src, alt = "Logo", className = "w-16 h-16", style }: Props
 };
 
 export const TourDeApp = ({ className, style }: PropsLogo) => {
-  return <CustomLogo src="https://tourde.app/_nuxt/logo.BRGNV3jG.webp" alt="Tour De App" style={style} className={className}/>
+  return <CustomLogo src="https://tourdeapp.com/_ipx/_/img/logo.svg" alt="Tour De App" style={style} className={className}/>
 }
 
 export default CustomLogo;
