@@ -1,21 +1,23 @@
-import { Route, Routes } from 'react-router-dom'
-import { PageInfo } from './constants/PageInfo'
-import Navbar from './components/ui/Navbar'
-import Starfield from './components/ui/Starfield'
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/ui/Navbar";
+import Starfield from "./components/ui/Starfield";
+import { PageInfo } from "./constants/PageInfo";
 
 export function App() {
-  return ( <>
-        <Navbar/>
-        <Starfield
-          speedFactor={0.05}
-          backgroundColor="black"
-          starColor={[255, 255, 255]}
-          starCount={5000} />
+  return (
+    <div >
+      <Navbar />
+      <Starfield
+        speedFactor={0.05}
+        backgroundColor="black"
+        starColor={[255, 255, 255]}
+        starCount={5000}
+      />
       <Routes>
         {PageInfo.map((item) => (
-          <Route path={item.link} element={<item.pageElement/>}/>
+          <Route key={item.link} path={item.link} element={<item.pageElement />} />
         ))}
       </Routes>
-    </>
-  )
+    </div>
+  );
 }
