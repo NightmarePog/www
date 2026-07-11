@@ -1,18 +1,20 @@
-import { IconButtonProps } from "@/types/IconButton";
-import { TourDeApp } from "@/components/ui/CustomIcons";
-export interface highlightProps extends IconButtonProps {
-    highlightDescription: string
+export interface HighlightProps {
+  name: string
+  link: string
+  highlightDescription: string
 }
 
-const highlights: highlightProps[] = [
-    {
-        name: "Tour De App",
-        description: "web Development Competition",
-        link: "https://tourde.app/",
-        icon: TourDeApp,
-        className: "w-100 p-2 brightness-2000 hover:brightness-2000 h-auto hover:scale-100 pr-5",
-        highlightDescription: "10th as Black Mesa Team 2025"
-    }
+const highlights: HighlightProps[] = [
+  {
+    name: 'Tour De App',
+    link: 'https://tourdeapp.cz/',
+    highlightDescription: '10th as Black Mesa Team 2025',
+  },
+  {
+    name: 'Kybersoutěž',
+    link: 'https://www.kybersoutez.cz/',
+    highlightDescription: 'národní finále 2026',
+  },
 ]
 
 export default highlights
