@@ -1,27 +1,43 @@
 interface Project {
-   name: string
-   description: string
-   link: string
-   image: string
+  name: string
+  description: string
+  link: string
+  image: string
+  tags: string[]
+  features: string[]
 }
 
 export const Projects: Project[] = [
-   {
-      name: "LArch 8",
-      description: "simple Assembly like language interpreter written in C",
-      link: "https://github.com/NightmarePog/LArch8",
-      image: "https://opengraph.githubassets.com/1e228ba744b45f0938ebd9f7f4188d546cebe376d460feb7e7c19b048e8fe0d8/NightmarePog/LArch8",
-   },
-   {
-      name: "Flamework Hotbar",
-      description: "Hotbar framework made for Roblox in Flamework with technologies like 'Roblox-TS'",
-      link: "https://github.com/NightmarePog/Flamework-Hotbar",
-      image: "https://opengraph.githubassets.com/ca71d408986fff726c37541c0e82efb23332920aacf66b00961f8a541a36cd6a/NightmarePog/Flamework-Hotbar",
-   },
-   {
-      name: "CROOM",
-      description: "Simple 3D rendering engine inspired by DOOM rendering, made in C++, UNFINISHED",
-      link: "https://github.com/NightmarePog/CROOM",
-      image: "https://opengraph.githubassets.com/560b5c8ec59f12608109c31244c2cbeb80c046ff7ce720cd58577e6334cdedfd/NightmarePog/CROOM"
-   }
+  {
+    name: "Laze",
+    description: "Statically typed, class-based language that transpiles to Lua 5.1. The compiler is self-hosted — written in Laze itself.",
+    link: "https://github.com/NightmarePog/Laze",
+    image: "https://opengraph.githubassets.com/1/NightmarePog/Laze",
+    tags: ["Language", "Compiler", "Lua", "Self-hosted"],
+    features: ["Static types & generics", "Pattern matching", "Traits", "Optimizer"],
+  },
+  {
+    name: "LArch 8",
+    description: "Simple assembly-like language interpreter written in C.",
+    link: "https://github.com/NightmarePog/LArch8",
+    image: "https://opengraph.githubassets.com/1/NightmarePog/LArch8",
+    tags: ["C", "Interpreter", "Assembly"],
+    features: ["Custom instruction set", "Register machine", "CLI runner"],
+  },
+  {
+    name: "Flamework Hotbar",
+    description: "Hotbar framework for Roblox built with Flamework and Roblox-TS.",
+    link: "https://github.com/NightmarePog/Flamework-Hotbar",
+    image: "https://opengraph.githubassets.com/1/NightmarePog/Flamework-Hotbar",
+    tags: ["TypeScript", "Roblox", "Flamework"],
+    features: ["Slot management", "Equip/unequip hooks", "Networked"],
+  },
+  {
+    name: "CROOM",
+    description: "3D rendering engine inspired by DOOM's rendering technique, written in C++.",
+    link: "https://github.com/NightmarePog/CROOM",
+    image: "https://opengraph.githubassets.com/1/NightmarePog/CROOM",
+    tags: ["C++", "3D", "Rendering"],
+    features: ["Raycasting engine", "Sector-based map", "Texture mapping"],
+  },
 ]
