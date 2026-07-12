@@ -10,7 +10,11 @@ const EMAIL = 'erllukas07@gmail.com'
 const SOCIALS = [
   { Icon: SiGithub, href: 'https://github.com/NightmarePog', label: 'GitHub' },
   { Icon: SiInstagram, href: 'https://www.instagram.com/nightmarepog/', label: 'Instagram' },
-  { Icon: SiLinkedin, href: 'https://www.linkedin.com/in/luk%C3%A1%C5%A1-erl-7011102a6/', label: 'LinkedIn' },
+  {
+    Icon: SiLinkedin,
+    href: 'https://www.linkedin.com/in/luk%C3%A1%C5%A1-erl-7011102a6/',
+    label: 'LinkedIn',
+  },
 ]
 
 export const ContactSection = () => {
@@ -24,28 +28,31 @@ export const ContactSection = () => {
   }
 
   return (
-    <section id="contact" className="pt-28 px-6 border-t border-line">
-      <div className="max-w-3xl mx-auto text-center">
+    <section id="contact" className="border-line border-t px-6 pt-28">
+      <div className="mx-auto max-w-3xl text-center">
         <SectionHeading eyebrow="// contact" title="Let's build something" align="center" />
 
         <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger}>
-          <motion.p variants={fadeUp} className="text-lg text-ink-muted leading-relaxed mb-10">
-            Open to internships, collaborations, and interesting projects.
-            The fastest way to reach me is email.
+          <motion.p variants={fadeUp} className="text-ink-muted mb-10 text-lg leading-relaxed">
+            Open to internships, collaborations, and interesting projects. The fastest way to reach
+            me is email.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <motion.div
+            variants={fadeUp}
+            className="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
             <a
               href={`mailto:${EMAIL}`}
-              className="px-6 py-3 rounded-md bg-ink text-bg font-medium text-sm hover:bg-white transition-colors"
+              className="bg-ink text-bg rounded-md px-6 py-3 text-sm font-medium transition-colors hover:bg-white"
             >
               {EMAIL}
             </a>
             <button
               onClick={copyEmail}
-              className="inline-flex items-center gap-2 px-4 py-3 rounded-md border border-line-strong font-mono text-xs text-ink-muted hover:border-ice-line hover:text-ice transition-colors cursor-pointer"
+              className="border-line-strong text-ink-muted hover:border-ice-line hover:text-ice inline-flex cursor-pointer items-center gap-2 rounded-md border px-4 py-3 font-mono text-xs transition-colors"
             >
-              {copied ? <Check className="size-3.5 text-ice" /> : <Copy className="size-3.5" />}
+              {copied ? <Check className="text-ice size-3.5" /> : <Copy className="size-3.5" />}
               {copied ? 'copied' : 'copy'}
             </button>
           </motion.div>
@@ -68,11 +75,11 @@ export const ContactSection = () => {
         </motion.div>
       </div>
 
-      <footer className="max-w-6xl mx-auto mt-24 py-8 border-t border-line flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="font-mono text-[11px] text-ink-faint">
-          © {new Date().getFullYear()} Lukáš Erl — built with React + Vite
+      <footer className="border-line mx-auto mt-24 flex max-w-6xl flex-col items-center justify-between gap-3 border-t py-8 sm:flex-row">
+        <p className="text-ink-faint font-mono text-[11px]">
+          © {new Date().getFullYear()} Lukáš Erl - built with React + Vite
         </p>
-        <p className="font-mono text-[11px] text-ink-faint tracking-[0.2em]">
+        <p className="text-ink-faint font-mono text-[11px] tracking-[0.2em]">
           {'// signal over noise'}
         </p>
       </footer>

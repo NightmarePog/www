@@ -38,18 +38,18 @@ export const AboutSection = () => (
       <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
         <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger}>
           <motion.p variants={fadeUp} className="text-ink-muted mb-5 text-lg leading-relaxed">
-            Hey! I'm Lukáš Erl — online as{' '}
+            Hey! I'm Lukáš Erl, or online as{' '}
             <span className="text-ink font-medium">NightmarePog</span>. A 19-year-old student at
             SOŠE Hluboká nad Vltavou, Czech Republic.
           </motion.p>
           <motion.p variants={fadeUp} className="text-ink-muted mb-5 text-lg leading-relaxed">
             I love full-stack web development and game development, but what really pulls me in is
-            language tooling — I built <span className="text-ink font-medium">Laze</span>, a
+            language tooling. I built <span className="text-ink font-medium">Laze</span>, a
             statically typed language whose compiler is written in Laze itself.
           </motion.p>
           <motion.p variants={fadeUp} className="text-ink-muted mb-8 text-lg leading-relaxed">
             Lately I've been diving into cybersecurity too. When I'm not coding, I'm probably
-            watching a rocket launch — big spaceflight fan.
+            watching a rocket launch, big spaceflight fan.
           </motion.p>
 
           <div className="flex flex-wrap gap-3">
