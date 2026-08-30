@@ -34,8 +34,8 @@ export const ContactSection = () => {
 
         <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger}>
           <motion.p variants={fadeUp} className="text-ink-muted mb-10 text-lg leading-relaxed">
-            Open to internships, collaborations, and interesting projects. The fastest way to reach
-            me is email.
+            Available for a long-term part-time role, internship, or project alongside school in
+            South Bohemia or remotely. The fastest way to reach me is email.
           </motion.p>
 
           <motion.div

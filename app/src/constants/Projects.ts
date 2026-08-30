@@ -2,7 +2,7 @@ interface Project {
   name: string
   description: string
   link: string
-  image: string
+  icon: 'framework' | 'education' | 'scheduling'
   tags: string[]
   features: string[]
 }
@@ -13,7 +13,7 @@ export const Projects: Project[] = [
     description:
       'Annotation-first Kotlin framework that generates Discord command metadata and dispatch code at compile time.',
     link: 'https://github.com/NightmarePog/kord-annotations',
-    image: 'https://opengraph.githubassets.com/1/NightmarePog/kord-annotations',
+    icon: 'framework',
     tags: ['Kotlin', 'KSP', 'Gradle', 'Discord'],
     features: [
       'Compile-time code generation',
@@ -23,27 +23,25 @@ export const Projects: Project[] = [
     ],
   },
   {
-    name: 'LArch 8',
-    description: 'Simple assembly-like language interpreter written in C.',
-    link: 'https://github.com/NightmarePog/LArch8',
-    image: 'https://opengraph.githubassets.com/1/NightmarePog/LArch8',
-    tags: ['C', 'Interpreter', 'Assembly'],
-    features: ['Custom instruction set', 'Register machine', 'CLI runner'],
+    name: 'ThinkAcademy',
+    description:
+      'Education platform created for Tour de App 2026. I owned the frontend implementation and helped organize the team.',
+    link: 'https://github.com/NightmarePog/TdA26-Brain--brain-nullptr-',
+    icon: 'education',
+    tags: ['TypeScript', 'Next.js', 'React Query', 'Team project'],
+    features: ['Frontend ownership', 'API integration', 'Cross-functional delivery'],
   },
   {
-    name: 'Flamework Hotbar',
-    description: 'Hotbar framework for Roblox built with Flamework and Roblox-TS.',
-    link: 'https://github.com/NightmarePog/Flamework-Hotbar',
-    image: 'https://opengraph.githubassets.com/1/NightmarePog/Flamework-Hotbar',
-    tags: ['TypeScript', 'Roblox', 'Flamework'],
-    features: ['Slot management', 'Equip/unequip hooks', 'Networked'],
-  },
-  {
-    name: 'CROOM',
-    description: "3D rendering engine inspired by DOOM's rendering technique, written in C++.",
-    link: 'https://github.com/NightmarePog/CROOM',
-    image: 'https://opengraph.githubassets.com/1/NightmarePog/CROOM',
-    tags: ['C++', '3D', 'Rendering'],
-    features: ['Raycasting engine', 'Sector-based map', 'Texture mapping'],
+    name: 'Black Mesa Meeting App',
+    description:
+      'Team scheduling application built for Tour de App 2025, where Black Mesa placed 10th.',
+    link: 'https://github.com/NightmarePog/Black-Mesa-25-meeting-app',
+    icon: 'scheduling',
+    tags: ['React', 'TypeScript', 'Flask', 'Competition'],
+    features: [
+      'Admin-hosted meeting rooms',
+      'React frontend with Flask backend',
+      '10th-place entry',
+    ],
   },
 ]

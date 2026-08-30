@@ -1,67 +1,86 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Blocks, CalendarDays, GraduationCap } from 'lucide-react'
 import { fadeUp } from '@/lib/motion'
 
 export interface ProjectData {
   name: string
   description: string
   link: string
-  image: string
+  icon: 'framework' | 'education' | 'scheduling'
   tags: string[]
   features: string[]
 }
 
+const PROJECT_ICONS = {
+  framework: Blocks,
+  education: GraduationCap,
+  scheduling: CalendarDays,
+}
+
 const Tag = ({ children }: { children: string }) => (
-  <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-muted border border-line rounded-sm px-2 py-1">
+  <span className="text-ink-muted border-line rounded-sm border px-2 py-1 font-mono text-[10px] tracking-[0.15em] uppercase">
     {children}
   </span>
 )
 
-export const ProjectCard = ({ project, featured = false }: { project: ProjectData; featured?: boolean }) => (
-  <motion.a
-    variants={fadeUp}
-    href={project.link}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={`group relative flex flex-col overflow-hidden rounded-lg border border-line bg-surface
-      hover:border-line-strong hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)]
-      transition-all duration-300 ${featured ? 'md:grid md:grid-cols-[1.15fr_1fr]' : ''}`}
-  >
-    <div className={`overflow-hidden border-line ${featured ? 'md:border-r border-b md:border-b-0' : 'border-b'}`}>
-      <img
-        src={project.image}
-        alt={project.name}
-        loading="lazy"
-        className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
-      />
-    </div>
+export const ProjectCard = ({
+  project,
+  featured = false,
+}: {
+  project: ProjectData
+  featured?: boolean
+}) => {
+  const Icon = PROJECT_ICONS[project.icon]
 
-    <div className={`flex flex-col p-6 ${featured ? 'md:p-8 justify-center' : ''}`}>
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <h3 className={`font-semibold tracking-tight text-ink ${featured ? 'text-2xl' : 'text-lg'}`}>
-          {project.name}
-        </h3>
-        <ArrowUpRight className="size-4 shrink-0 mt-1 text-ink-faint group-hover:text-ice group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+  return (
+    <motion.a
+      variants={fadeUp}
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group border-line bg-surface hover:border-line-strong relative flex flex-col overflow-hidden rounded-lg border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] ${featured ? 'md:grid md:grid-cols-[1.15fr_1fr]' : ''}`}
+    >
+      <div
+        className={`border-line bg-surface-2 relative flex min-h-44 items-center justify-center overflow-hidden ${featured ? 'border-b md:min-h-72 md:border-r md:border-b-0' : 'border-b'}`}
+      >
+        <div className="bg-ice-soft absolute size-40 rounded-full blur-3xl transition-transform duration-500 group-hover:scale-125" />
+        <Icon
+          aria-hidden
+          strokeWidth={1.15}
+          className={`text-ink-muted group-hover:text-ice relative transition-all duration-300 group-hover:-translate-y-1 ${featured ? 'size-24 md:size-32' : 'size-20'}`}
+        />
+        <span className="text-ink-faint absolute right-4 bottom-3 font-mono text-[9px] tracking-[0.2em] uppercase">
+          {project.tags[0]}
+        </span>
       </div>
 
-      <p className="text-sm text-ink-muted leading-relaxed mb-5">{project.description}</p>
+      <div className={`flex flex-col p-6 ${featured ? 'justify-center md:p-8' : ''}`}>
+        <div className="mb-3 flex items-start justify-between gap-3">
+          <h3
+            className={`text-ink font-semibold tracking-tight ${featured ? 'text-2xl' : 'text-lg'}`}
+          >
+            {project.name}
+          </h3>
+          <ArrowUpRight className="text-ink-faint group-hover:text-ice mt-1 size-4 shrink-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </div>
 
-      {featured && (
+        <p className="text-ink-muted mb-5 text-sm leading-relaxed">{project.description}</p>
+
         <ul className="mb-6 space-y-1.5">
-          {project.features.map((f) => (
-            <li key={f} className="flex items-center gap-2.5 text-sm text-ink-muted">
-              <span className="size-1 bg-ice rounded-full shrink-0" />
+          {(featured ? project.features : project.features.slice(0, 2)).map((f) => (
+            <li key={f} className="text-ink-muted flex items-center gap-2.5 text-sm">
+              <span className="bg-ice size-1 shrink-0 rounded-full" />
               {f}
             </li>
           ))}
         </ul>
-      )}
 
-      <div className="flex flex-wrap gap-1.5 mt-auto">
-        {project.tags.map((t) => (
-          <Tag key={t}>{t}</Tag>
-        ))}
+        <div className="mt-auto flex flex-wrap gap-1.5">
+          {project.tags.map((t) => (
+            <Tag key={t}>{t}</Tag>
+          ))}
+        </div>
       </div>
-    </div>
-  </motion.a>
-)
+    </motion.a>
+  )
+}

@@ -19,7 +19,7 @@ export const ProjectsSection = () => {
           className="flex flex-col gap-5"
         >
           <ProjectCard project={featured} featured />
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2">
             {rest.map((project) => (
               <ProjectCard key={project.name} project={project} />
             ))}

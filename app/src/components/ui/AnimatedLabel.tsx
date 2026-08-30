@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react'
 
 const labels = [
-  'Full Stack Developer',
-  'Linux User',
-  'Cat Lover',
-  'Language Creator',
-  'Space Enthusiast',
+  'Student Software Developer',
+  'Full-Stack Developer',
+  'Kotlin Tooling Developer',
   'Game Developer',
-  'Cybersecurity Junior',
+  'Linux Systems Enthusiast',
 ]
 
-export const AnimatedLabel = ({ color = '#ececea', className = '' }: { color?: string; className?: string }) => {
+export const AnimatedLabel = ({
+  color = '#ececea',
+  className = '',
+}: {
+  color?: string
+  className?: string
+}) => {
   const [displayed, setDisplayed] = useState('')
   const [idx, setIdx] = useState(0)
   const [phase, setPhase] = useState<'typing' | 'pausing' | 'deleting'>('typing')

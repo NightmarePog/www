@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion'
 import { Trophy } from 'lucide-react'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { webStack, gameDevStack, othersStack } from '@/constants/Stacks'
+import { primaryStack, gameDevStack, exploringStack } from '@/constants/Stacks'
 import highlights from '@/constants/Highlights'
 import { fadeUp, stagger, viewport } from '@/lib/motion'
 import type { IconButtonProps } from '@/types/IconButton'
 
 const STACK_GROUPS = [
-  { label: 'stack.web', items: webStack },
+  { label: 'stack.primary', items: primaryStack },
   { label: 'stack.gamedev', items: gameDevStack },
-  { label: 'stack.tools', items: othersStack },
+  { label: 'stack.exploring', items: exploringStack },
 ]
 
 const TechChip = ({ item }: { item: IconButtonProps }) => {
@@ -38,19 +38,19 @@ export const AboutSection = () => (
       <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
         <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger}>
           <motion.p variants={fadeUp} className="text-ink-muted mb-5 text-lg leading-relaxed">
-            Hey! I'm Lukáš Erl, or online as{' '}
+            I'm Lukáš Erl, also known online as{' '}
             <span className="text-ink font-medium">NightmarePog</span>. A 19-year-old student at
             SOŠE Hluboká nad Vltavou, Czech Republic.
           </motion.p>
           <motion.p variants={fadeUp} className="text-ink-muted mb-5 text-lg leading-relaxed">
-            I work across full-stack web and game development, with a recent focus on Kotlin tooling
-            and Linux systems. I built{' '}
-            <span className="text-ink font-medium">Kord Annotations</span>, a compile-time command
-            framework with KSP code generation, Gradle integration, and Spring Boot support.
+            I work across web and game development, with a recent focus on Kotlin tooling and Linux
+            systems. I built <span className="text-ink font-medium">Kord Annotations</span>, a
+            compile-time command framework with KSP code generation, Gradle integration, and Spring
+            Boot support.
           </motion.p>
           <motion.p variants={fadeUp} className="text-ink-muted mb-8 text-lg leading-relaxed">
-            I am also developing my cybersecurity and systems-programming skills through practical
-            Linux and Rust projects.
+            I learn by shipping projects, documenting decisions, and working through real technical
+            constraints with a team.
           </motion.p>
 
           <div className="flex flex-wrap gap-3">

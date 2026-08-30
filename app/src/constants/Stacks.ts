@@ -3,10 +3,11 @@ import {
   SiBlender,
   SiC,
   SiCplusplus,
-  SiCss3,
   SiGodotengine,
-  SiHtml5,
-  SiJavascript,
+  SiGit,
+  SiGradle,
+  SiKotlin,
+  SiLinux,
   SiLua,
   SiNextdotjs,
   SiOpenjdk,
@@ -14,41 +15,16 @@ import {
   SiReact,
   SiRobloxstudio,
   SiRust,
-  SiTailwindcss,
+  SiSpring,
   SiTypescript,
 } from 'react-icons/si'
 
-export const webStack: IconButtonProps[] = [
-  {
-    name: 'HTML',
-    link: 'https://cs.wikipedia.org/wiki/Hypertext_Markup_Language',
-    icon: SiHtml5,
-    description: 'HTML5',
-    className: 'text-[#E34F26]',
-  },
-  {
-    name: 'CSS',
-    link: 'https://en.wikipedia.org/wiki/CSS',
-    icon: SiCss3,
-    className: 'text-[#1572B6]',
-  },
-  {
-    name: 'JavaScript',
-    link: 'https://en.wikipedia.org/wiki/JavaScript',
-    icon: SiJavascript,
-    className: 'text-[#F7DF1E]',
-  },
+export const primaryStack: IconButtonProps[] = [
   {
     name: 'TypeScript',
     link: 'https://www.typescriptlang.org/',
     icon: SiTypescript,
     className: 'text-[#3178C6]',
-  },
-  {
-    name: 'TailwindCSS',
-    link: 'https://tailwindcss.com/',
-    icon: SiTailwindcss,
-    className: 'text-[#38B2AC]',
   },
   {
     name: 'React',
@@ -61,6 +37,43 @@ export const webStack: IconButtonProps[] = [
     link: 'https://nextjs.org/',
     icon: SiNextdotjs,
     className: 'text-white',
+  },
+  {
+    name: 'Kotlin',
+    link: 'https://kotlinlang.org/',
+    icon: SiKotlin,
+    description: 'Libraries, code generation, and backend development',
+    className: 'text-[#A97BFF]',
+  },
+  {
+    name: 'Java',
+    link: 'https://www.java.com/',
+    icon: SiOpenjdk,
+    className: 'text-[#ED8B00]',
+  },
+  {
+    name: 'Spring',
+    link: 'https://spring.io/',
+    icon: SiSpring,
+    className: 'text-[#6DB33F]',
+  },
+  {
+    name: 'Gradle',
+    link: 'https://gradle.org/',
+    icon: SiGradle,
+    className: 'text-[#23A9A1]',
+  },
+  {
+    name: 'Git',
+    link: 'https://git-scm.com/',
+    icon: SiGit,
+    className: 'text-[#F05032]',
+  },
+  {
+    name: 'Linux',
+    link: 'https://www.linux.org/',
+    icon: SiLinux,
+    className: 'text-[#FCC624]',
   },
 ]
 
@@ -84,15 +97,15 @@ export const gameDevStack: IconButtonProps[] = [
     description: 'I mostly just do models for my games here',
   },
   {
-    name: 'TypeScript',
-    link: 'https://www.typescriptlang.org/',
-    icon: SiTypescript,
-    className: 'text-[#3178C6]',
-    description: 'Used with roblox-ts and Flamework for typed Roblox projects',
+    name: 'Lua',
+    link: 'https://www.lua.org/',
+    icon: SiLua,
+    description: 'Roblox and ComputerCraft scripting',
+    className: 'text-[#00007D]',
   },
 ]
 
-export const othersStack: IconButtonProps[] = [
+export const exploringStack: IconButtonProps[] = [
   {
     name: 'Python',
     link: 'https://www.python.org/',
@@ -101,37 +114,24 @@ export const othersStack: IconButtonProps[] = [
     description: 'Automation, scripting, and tooling',
   },
   {
-    name: 'Lua',
-    link: 'https://www.lua.org/',
-    icon: SiLua,
-    description: 'Roblox and ComputerCraft scripting',
-    className: 'text-[#00007D]',
-  },
-  {
     name: 'C',
     link: 'https://en.wikipedia.org/wiki/C_(programming_language)',
     icon: SiC,
-    description: 'Interpreters and low-level programming projects',
+    description: 'Some experience from an interpreter project',
     className: 'text-[#abbbce]',
   },
   {
     name: 'C++',
     link: 'https://isocpp.org/',
     icon: SiCplusplus,
-    description: 'Low-level experiments like CROOM, my DOOM-style renderer',
+    description: 'Some experience from graphics experiments',
     className: 'text-[#00599C]',
-  },
-  {
-    name: 'Java',
-    link: 'https://www.java.com/',
-    icon: SiOpenjdk,
-    className: 'text-[#ED8B00]',
   },
   {
     name: 'Rust',
     link: 'https://www.rust-lang.org/',
     icon: SiRust,
-    description: 'Linux tooling and systems-programming projects',
+    description: 'Some experience from Linux tooling work',
     className: 'text-[#DEA584]',
   },
 ]
