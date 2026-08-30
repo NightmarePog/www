@@ -1,10 +1,10 @@
-# Lukas's page
-hey, this is basically my portfolio page
+# Lukáš Erl — portfolio
 
+Personal portfolio presenting my projects, technical experience, and contact information.
 
-I am showcasing there what i can work with, my projects and stuff like that
+## Technologies
 
-
-Sorry for all sort of typos in commits etc...
-# technologies:
-Vite, React, Tailwind-CSS
+- Vite
+- React
+- TypeScript
+- Tailwind CSS

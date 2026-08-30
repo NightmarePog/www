@@ -43,13 +43,14 @@ export const AboutSection = () => (
             SOŠE Hluboká nad Vltavou, Czech Republic.
           </motion.p>
           <motion.p variants={fadeUp} className="text-ink-muted mb-5 text-lg leading-relaxed">
-            I love full-stack web development and game development, but what really pulls me in is
-            language tooling. I built <span className="text-ink font-medium">Laze</span>, a
-            statically typed language whose compiler is written in Laze itself.
+            I work across full-stack web and game development, with a recent focus on Kotlin tooling
+            and Linux systems. I built{' '}
+            <span className="text-ink font-medium">Kord Annotations</span>, a compile-time command
+            framework with KSP code generation, Gradle integration, and Spring Boot support.
           </motion.p>
           <motion.p variants={fadeUp} className="text-ink-muted mb-8 text-lg leading-relaxed">
-            Lately I've been diving into cybersecurity too. When I'm not coding, I'm probably
-            watching a rocket launch, big spaceflight fan.
+            I am also developing my cybersecurity and systems-programming skills through practical
+            Linux and Rust projects.
           </motion.p>
 
           <div className="flex flex-wrap gap-3">
