@@ -1,12 +1,22 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Blocks, CalendarDays, GraduationCap } from 'lucide-react'
+import {
+  ArrowUpRight,
+  Blocks,
+  CalendarDays,
+  Cpu,
+  GraduationCap,
+  PackageOpen,
+  TrainFront,
+} from 'lucide-react'
 import { fadeUp } from '@/lib/motion'
 
 export interface ProjectData {
   name: string
   description: string
   link: string
-  icon: 'framework' | 'education' | 'scheduling'
+  icon: 'framework' | 'education' | 'scheduling' | 'railway' | 'inventory' | 'cpu'
+  status: 'Released' | 'Completed' | 'In development' | 'Unfinished' | 'Learning project'
+  version?: string
   tags: string[]
   features: string[]
 }
@@ -15,6 +25,17 @@ const PROJECT_ICONS = {
   framework: Blocks,
   education: GraduationCap,
   scheduling: CalendarDays,
+  railway: TrainFront,
+  inventory: PackageOpen,
+  cpu: Cpu,
+}
+
+const STATUS_STYLES: Record<ProjectData['status'], string> = {
+  Released: 'border-ice-line bg-ice-soft text-ice',
+  Completed: 'border-line-strong bg-surface-2 text-ink-muted',
+  'In development': 'border-ice-line bg-ice-soft text-ice',
+  Unfinished: 'border-line bg-bg text-ink-faint',
+  'Learning project': 'border-line bg-bg text-ink-faint',
 }
 
 const Tag = ({ children }: { children: string }) => (
@@ -44,6 +65,18 @@ export const ProjectCard = ({
         className={`border-line bg-surface-2 relative flex min-h-44 items-center justify-center overflow-hidden ${featured ? 'border-b md:min-h-72 md:border-r md:border-b-0' : 'border-b'}`}
       >
         <div className="bg-ice-soft absolute size-40 rounded-full blur-3xl transition-transform duration-500 group-hover:scale-125" />
+        <div className="absolute top-4 right-4 left-4 flex items-center justify-between gap-3">
+          <span
+            className={`rounded-full border px-2.5 py-1 font-mono text-[9px] tracking-[0.14em] uppercase ${STATUS_STYLES[project.status]}`}
+          >
+            {project.status}
+          </span>
+          {project.version && (
+            <span className="border-line bg-bg/70 text-ink-muted rounded-full border px-2.5 py-1 font-mono text-[9px] tracking-[0.14em] uppercase backdrop-blur-sm">
+              {project.version}
+            </span>
+          )}
+        </div>
         <Icon
           aria-hidden
           strokeWidth={1.15}
