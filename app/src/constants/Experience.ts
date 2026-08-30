@@ -26,6 +26,7 @@ export const EXPERIENCE: ExperienceItem[] = [
 ]
 
 export const MILESTONES = [
+  { value: '2026', label: 'National finalist', detail: 'HAXAGON Skirmish' },
   { value: '2026', label: 'National finalist', detail: 'Kybersoutěž' },
   { value: '10th', label: 'Team placement', detail: 'Tour de App 2025' },
   { value: '2027', label: 'Expected graduation', detail: 'SOŠE Hluboká' },

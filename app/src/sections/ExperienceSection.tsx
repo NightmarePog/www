@@ -42,7 +42,7 @@ export const ExperienceSection = () => (
 
         <div className="flex flex-col gap-5">
           <motion.div variants={fadeUp} className="border-line bg-surface rounded-lg border p-6">
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-6">
               {MILESTONES.map((milestone) => (
                 <div key={milestone.detail} className="min-w-0 text-center">
                   <p className="text-ink text-2xl font-semibold tracking-tight">
