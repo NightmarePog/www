@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import {
   ArrowUpRight,
   Blocks,
-  CalendarDays,
+  ClipboardCheck,
   Cpu,
-  GraduationCap,
   PackageOpen,
+  PackageSearch,
   TrainFront,
 } from 'lucide-react'
 import { fadeUp } from '@/lib/motion'
@@ -14,7 +14,7 @@ export interface ProjectData {
   name: string
   description: string
   link: string
-  icon: 'framework' | 'education' | 'scheduling' | 'railway' | 'inventory' | 'cpu'
+  icon: 'framework' | 'quiz' | 'package-manager' | 'railway' | 'inventory' | 'cpu'
   status: 'Released' | 'Completed' | 'In development' | 'Unfinished' | 'Learning project'
   version?: string
   tags: string[]
@@ -23,8 +23,8 @@ export interface ProjectData {
 
 const PROJECT_ICONS = {
   framework: Blocks,
-  education: GraduationCap,
-  scheduling: CalendarDays,
+  quiz: ClipboardCheck,
+  'package-manager': PackageSearch,
   railway: TrainFront,
   inventory: PackageOpen,
   cpu: Cpu,

@@ -2,7 +2,7 @@ interface Project {
   name: string
   description: string
   link: string
-  icon: 'framework' | 'education' | 'scheduling' | 'railway' | 'inventory' | 'cpu'
+  icon: 'framework' | 'quiz' | 'package-manager' | 'railway' | 'inventory' | 'cpu'
   status: 'Released' | 'Completed' | 'In development' | 'Unfinished' | 'Learning project'
   version?: string
   tags: string[]
@@ -27,29 +27,33 @@ export const Projects: Project[] = [
     ],
   },
   {
-    name: 'ThinkAcademy',
+    name: 'Curtis',
     description:
-      'Education platform created for Tour de App 2026. I owned the frontend implementation and helped organize the team.',
-    link: 'https://github.com/NightmarePog/TdA26-Brain--brain-nullptr-',
-    icon: 'education',
-    status: 'Completed',
-    version: 'TdA 2026',
-    tags: ['TypeScript', 'Next.js', 'React Query', 'Team project'],
-    features: ['Frontend ownership', 'API integration', 'Cross-functional delivery'],
+      'Full-stack quiz platform that started from a task set by my teacher: build a practical alternative to Microsoft Teams quizzes.',
+    link: 'https://github.com/NightmarePog/Curtis',
+    icon: 'quiz',
+    status: 'In development',
+    version: 'MVP',
+    tags: ['Java', 'Spring', 'Next.js', 'PostgreSQL'],
+    features: [
+      'Teacher and student workflows',
+      'Microsoft Entra ID authentication',
+      'Automatic evaluation and live quiz sessions',
+    ],
   },
   {
-    name: 'Black Mesa Meeting App',
+    name: 'Purr',
     description:
-      'Team scheduling application built for Tour de App 2025, where Black Mesa placed 10th.',
-    link: 'https://github.com/NightmarePog/Black-Mesa-25-meeting-app',
-    icon: 'scheduling',
-    status: 'Completed',
-    version: 'TdA 2025',
-    tags: ['React', 'TypeScript', 'Flask', 'Competition'],
+      'Unfinished AUR package manager written in Rust, exploring dependency resolution, isolated builds, and safer application launching.',
+    link: 'https://github.com/NightmarePog/Purr',
+    icon: 'package-manager',
+    status: 'Unfinished',
+    version: 'v0.1.0-dev',
+    tags: ['Rust', 'Arch Linux', 'AUR', 'CLI'],
     features: [
-      'Admin-hosted meeting rooms',
-      'React frontend with Flask backend',
-      '10th-place entry',
+      'AUR metadata and dependency planning',
+      'Isolated package build flow',
+      'Install, remove, and run commands still in development',
     ],
   },
   {
