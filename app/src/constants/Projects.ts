@@ -47,7 +47,7 @@ export const Projects: Project[] = [
       'Unfinished AUR package manager written in Rust, exploring dependency resolution, isolated builds, and safer application launching.',
     link: 'https://github.com/NightmarePog/Purr',
     icon: 'package-manager',
-    status: 'Unfinished',
+    status: 'In development',
     version: 'v0.1.0-dev',
     tags: ['Rust', 'Arch Linux', 'AUR', 'CLI'],
     features: [

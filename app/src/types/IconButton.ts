@@ -1,8 +1,9 @@
 export interface IconButtonProps {
-    name: string,
-    link: string,
-    icon: React.ElementType
-    description?: string
-    className?: string
-    style?: React.CSSProperties
+  name: string
+  icon: React.ElementType
+  description: string
+  projects: Array<{
+    name: string
+    link?: string
+  }>
 }

@@ -1,4 +1,4 @@
-import { IconButtonProps } from '@/types/IconButton'
+import type { IconButtonProps } from '@/types/IconButton'
 import {
   SiBlender,
   SiC,
@@ -19,119 +19,156 @@ import {
   SiTypescript,
 } from 'react-icons/si'
 
+const links = {
+  portfolio: 'https://github.com/NightmarePog/www',
+  kord: 'https://github.com/NightmarePog/kord-annotations',
+  curtis: 'https://github.com/NightmarePog/Curtis',
+  purr: 'https://github.com/NightmarePog/Purr',
+  trainGame: 'https://www.roblox.com/games/113961418864058/Generic-train-game',
+  hotbar: 'https://github.com/NightmarePog/Flamework-Hotbar',
+  larch8: 'https://github.com/NightmarePog/LArch8',
+  croom: 'https://github.com/NightmarePog/CROOM',
+  dotfiles: 'https://github.com/NightmarePog/dotfiles',
+  arpTool: 'https://github.com/NightmarePog/arp-poison-tool',
+  ccux: 'https://github.com/NightmarePog/CCux-computercraft',
+}
+
 export const primaryStack: IconButtonProps[] = [
   {
     name: 'TypeScript',
-    link: 'https://www.typescriptlang.org/',
     icon: SiTypescript,
-    className: 'text-[#3178C6]',
+    description: 'My main language for web interfaces and Roblox game systems.',
+    projects: [
+      { name: 'Curtis', link: links.curtis },
+      { name: 'Generic Train Game', link: links.trainGame },
+      { name: 'Flamework Hotbar', link: links.hotbar },
+      { name: 'This portfolio', link: links.portfolio },
+    ],
   },
   {
     name: 'React',
-    link: 'https://react.dev/',
     icon: SiReact,
-    className: 'text-[#61DAFB]',
+    description: 'Used for responsive web interfaces and state-driven Roblox UI.',
+    projects: [
+      { name: 'Curtis', link: links.curtis },
+      { name: 'Generic Train Game UI', link: links.trainGame },
+      { name: 'Flamework Hotbar', link: links.hotbar },
+      { name: 'This portfolio', link: links.portfolio },
+    ],
   },
   {
     name: 'Next.js',
-    link: 'https://nextjs.org/',
     icon: SiNextdotjs,
-    className: 'text-white',
+    description: 'My framework for full-stack React applications with structured routing.',
+    projects: [{ name: 'Curtis', link: links.curtis }],
   },
   {
     name: 'Kotlin',
-    link: 'https://kotlinlang.org/',
     icon: SiKotlin,
-    description: 'Libraries, code generation, and backend development',
-    className: 'text-[#A97BFF]',
+    description: 'Used for libraries, compile-time tooling, and JVM backend development.',
+    projects: [{ name: 'Kord Annotations', link: links.kord }],
   },
   {
     name: 'Java',
-    link: 'https://www.java.com/',
     icon: SiOpenjdk,
-    className: 'text-[#ED8B00]',
+    description: 'Used for backend services and REST APIs on the JVM.',
+    projects: [{ name: 'Curtis backend', link: links.curtis }],
   },
   {
     name: 'Spring',
-    link: 'https://spring.io/',
     icon: SiSpring,
-    className: 'text-[#6DB33F]',
+    description: 'Used for authenticated APIs, persistence, validation, and application services.',
+    projects: [
+      { name: 'Curtis backend', link: links.curtis },
+      { name: 'Kord Annotations integration', link: links.kord },
+    ],
   },
   {
     name: 'Gradle',
-    link: 'https://gradle.org/',
     icon: SiGradle,
-    className: 'text-[#23A9A1]',
+    description: 'Used to structure, test, and publish multi-module JVM projects.',
+    projects: [
+      { name: 'Kord Annotations', link: links.kord },
+      { name: 'Curtis backend', link: links.curtis },
+    ],
   },
   {
     name: 'Git',
-    link: 'https://git-scm.com/',
     icon: SiGit,
-    className: 'text-[#F05032]',
+    description: 'The version-control foundation for my personal and team projects.',
+    projects: [
+      { name: 'Kord Annotations', link: links.kord },
+      { name: 'Curtis', link: links.curtis },
+      { name: 'Purr', link: links.purr },
+    ],
   },
   {
     name: 'Linux',
-    link: 'https://www.linux.org/',
     icon: SiLinux,
-    className: 'text-[#FCC624]',
+    description: 'My daily development environment and the target platform for my systems tooling.',
+    projects: [
+      { name: 'Purr', link: links.purr },
+      { name: 'Dotfiles', link: links.dotfiles },
+    ],
   },
 ]
 
 export const gameDevStack: IconButtonProps[] = [
   {
     name: 'Godot',
-    link: 'https://godotengine.org/',
     icon: SiGodotengine,
-    className: 'text-[#478CBF]',
+    description: 'Used to build and maintain interactive projects during my work at VR Centrum.',
+    projects: [{ name: 'VR Centrum game projects' }],
   },
   {
     name: 'Roblox Studio',
-    link: 'https://create.roblox.com/',
     icon: SiRobloxstudio,
-    className: 'text-[#009efeff]',
+    description: 'My main environment for building multiplayer game systems and interfaces.',
+    projects: [
+      { name: 'Generic Train Game', link: links.trainGame },
+      { name: 'Flamework Hotbar', link: links.hotbar },
+    ],
   },
   {
     name: 'Blender',
-    link: 'https://www.blender.org/',
     icon: SiBlender,
-    description: 'I mostly just do models for my games here',
+    description: 'Used mainly for creating and preparing models for my game projects.',
+    projects: [{ name: 'Generic Train Game assets', link: links.trainGame }],
   },
   {
     name: 'Lua',
-    link: 'https://www.lua.org/',
     icon: SiLua,
-    description: 'Roblox and ComputerCraft scripting',
-    className: 'text-[#00007D]',
+    description: 'Used for Roblox and ComputerCraft scripting, including generated Luau output.',
+    projects: [
+      { name: 'Generic Train Game', link: links.trainGame },
+      { name: 'CCux ComputerCraft', link: links.ccux },
+    ],
   },
 ]
 
 export const exploringStack: IconButtonProps[] = [
   {
     name: 'Python',
-    link: 'https://www.python.org/',
     icon: SiPython,
-    className: 'text-white',
-    description: 'Automation, scripting, and tooling',
+    description: 'Some experience from automation, networking, and small tooling projects.',
+    projects: [{ name: 'ARP Poison Tool', link: links.arpTool }],
   },
   {
     name: 'C',
-    link: 'https://en.wikipedia.org/wiki/C_(programming_language)',
     icon: SiC,
-    description: 'Some experience from an interpreter project',
-    className: 'text-[#abbbce]',
+    description: 'Some experience from building a small assembler and CPU interpreter.',
+    projects: [{ name: 'LArch8', link: links.larch8 }],
   },
   {
     name: 'C++',
-    link: 'https://isocpp.org/',
     icon: SiCplusplus,
-    description: 'Some experience from graphics experiments',
-    className: 'text-[#00599C]',
+    description: 'Some experience from experimenting with DOOM-style software rendering.',
+    projects: [{ name: 'CROOM', link: links.croom }],
   },
   {
     name: 'Rust',
-    link: 'https://www.rust-lang.org/',
     icon: SiRust,
-    description: 'Some experience from Linux tooling work',
-    className: 'text-[#DEA584]',
+    description: 'Some experience from developing Linux package-management and sandboxing tools.',
+    projects: [{ name: 'Purr', link: links.purr }],
   },
 ]
