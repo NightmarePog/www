@@ -72,7 +72,8 @@ export const HeroSection = () => (
           variants={introItem}
           className="text-ink-muted mb-10 max-w-md text-lg leading-relaxed"
         >
-          I build full-stack web apps, games, and low-level experiments in C and C++.
+          I build full-stack web apps and games, and explore software tooling and systems
+          programming.
         </motion.p>
 
         <motion.div variants={introItem} className="mb-10 flex flex-wrap items-center gap-4">

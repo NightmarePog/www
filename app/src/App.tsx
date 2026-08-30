@@ -18,6 +18,8 @@ export function App() {
         <meta property="og:title" content="Lukáš Erl — Full Stack Developer" />
         <meta property="og:description" content="Full stack developer and game developer." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://nightmarepog.dev" />
+        <link rel="canonical" href="https://nightmarepog.dev" />
         <meta name="twitter:card" content="summary" />
       </Helmet>
       <div className="bg-bg min-h-screen">
