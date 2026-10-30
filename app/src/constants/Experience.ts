@@ -1,33 +1,63 @@
-export interface ExperienceItem {
-  period: string
-  role: string
-  organization: string
-  type: string
-  description: string
+export interface LogEntry {
+  hash: string
+  date: string
+  lane: 'work' | 'competition'
+  title: string
+  subtitle: string
+  stamp: string
+  details?: string
+  link?: string
 }
 
-export const EXPERIENCE: ExperienceItem[] = [
+// Newest first, like `git log`. Hashes are decoration.
+export const LOG: LogEntry[] = [
   {
-    period: 'Dec 2024 — Jun 2025',
-    role: 'Development Lead',
-    organization: 'VR Centrum',
-    type: 'Project role',
-    description:
-      'Led a three-person team developing a VR game in Godot and GDScript, coordinating implementation and technical direction.',
+    hash: 'a3f9c21',
+    date: '2026',
+    lane: 'competition',
+    title: 'HAXAGON Skirmish',
+    subtitle: 'National finalist',
+    stamp: 'Final',
+    link: 'https://haxagon.cz/skirmish',
   },
   {
-    period: 'Aug 2024 — Dec 2024',
-    role: 'Sales & Technical Support Assistant',
-    organization: 'STARNET',
-    type: 'Part-time',
-    description:
-      'Helped customers troubleshoot connectivity issues and explained internet services and products.',
+    hash: '7e1b0d4',
+    date: '2026',
+    lane: 'competition',
+    title: 'Kybersoutěž',
+    subtitle: 'National finalist',
+    stamp: 'Final',
+    details: 'The Czech national cybersecurity competition.',
+    link: 'https://www.kybersoutez.cz/',
   },
-]
-
-export const MILESTONES = [
-  { value: '2026', label: 'National finalist', detail: 'HAXAGON Skirmish' },
-  { value: '2026', label: 'National finalist', detail: 'Kybersoutěž' },
-  { value: '10th', label: 'Team placement', detail: 'Tour de App 2025' },
-  { value: '2027', label: 'Expected graduation', detail: 'SOŠE Hluboká' },
+  {
+    hash: '51c8e9a',
+    date: '2025',
+    lane: 'competition',
+    title: 'Tour de App',
+    subtitle: '10th place',
+    stamp: '#10',
+    details: 'With team Black Mesa.',
+    link: 'https://tourdeapp.cz/',
+  },
+  {
+    hash: '9d02f6b',
+    date: 'Dec 2024 – Jun 2025',
+    lane: 'work',
+    title: 'Development Lead',
+    subtitle: 'VR Centrum',
+    stamp: 'Lead',
+    details:
+      'Led a three-person team building a VR game in Godot and GDScript. I split up the work and made the technical calls.',
+  },
+  {
+    hash: '2b7a1e0',
+    date: 'Aug 2024 – Dec 2024',
+    lane: 'work',
+    title: 'Sales & Technical Support',
+    subtitle: 'STARNET',
+    stamp: 'Part-time',
+    details:
+      'Helped customers fix connectivity problems and explained internet plans and hardware.',
+  },
 ]

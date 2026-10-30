@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { SiGithub, SiInstagram, SiLinkedin } from 'react-icons/si'
+import { SiGithub, SiLinkedin } from 'react-icons/si'
 import { KW, TY, VA, NU, ST, PL, Line, EmptyLine } from '@/components/ui/Code'
 import { EditorWindow } from '@/components/ui/EditorWindow'
 import { AnimatedLabel } from '@/components/ui/AnimatedLabel'
@@ -8,7 +8,6 @@ import { EASE, editorLineReveal } from '@/lib/motion'
 
 const SOCIALS = [
   { Icon: SiGithub, href: 'https://github.com/NightmarePog', label: 'GitHub' },
-  { Icon: SiInstagram, href: 'https://www.instagram.com/nightmarepog/', label: 'Instagram' },
   {
     Icon: SiLinkedin,
     href: 'https://www.linkedin.com/in/luk%C3%A1%C5%A1-erl-7011102a6/',
@@ -45,7 +44,7 @@ export const HeroSection = () => (
       }}
     />
 
-    <div className="relative mx-auto grid w-full max-w-6xl items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+    <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
       {/* intro */}
       <motion.div initial="hidden" animate="visible" variants={introStagger}>
         <motion.p
@@ -64,16 +63,18 @@ export const HeroSection = () => (
           variants={introItem}
           className="text-ink-muted mb-6 font-mono text-base md:text-lg"
         >
-          <span className="text-ink-faint">const role = "</span>
-          <AnimatedLabel className="text-base md:text-lg" />
-          <span className="text-ink-faint">"</span>
+          <span className="text-syn-kw">const</span> <span className="text-ink">role</span>
+          <span className="text-syn-punct"> = </span>
+          <span className="text-syn-str">"</span>
+          <AnimatedLabel color="#a3be8c" className="text-base md:text-lg" />
+          <span className="text-syn-str">"</span>
+          <span className="text-syn-punct">;</span>
         </motion.p>
         <motion.p
           variants={introItem}
           className="text-ink-muted mb-10 max-w-md text-lg leading-relaxed"
         >
-          I build full-stack web apps and games, and explore software tooling and systems
-          programming.
+          I build full-stack web apps and Roblox games, and I play cybersecurity competitions.
         </motion.p>
 
         <motion.div variants={introItem} className="mb-10 flex flex-wrap items-center gap-4">

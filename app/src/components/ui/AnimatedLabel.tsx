@@ -5,7 +5,7 @@ const labels = [
   'Full-Stack Developer',
   'Kotlin Tooling Developer',
   'Game Developer',
-  'Linux Systems Enthusiast',
+  'Roblox Developer',
 ]
 
 export const AnimatedLabel = ({
@@ -43,7 +43,7 @@ export const AnimatedLabel = ({
   }, [displayed, phase, idx])
 
   return (
-    <span className={`inline-block ${className}`} style={{ color, minWidth: '18ch' }}>
+    <span className={`inline-block ${className}`} style={{ color }}>
       {displayed}
       <span
         style={{

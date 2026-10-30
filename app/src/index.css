@@ -26,6 +26,16 @@
   --color-ice-soft: rgba(127, 155, 179, 0.12);
   --color-ice-line: rgba(127, 155, 179, 0.45);
 
+  /* Syntax — muted, cold colours; keyword red borrows from the rocket logo */
+  --color-syn-kw: #e06c75;
+  --color-syn-str: #a3be8c;
+  --color-syn-type: #ebcb8b;
+  --color-syn-num: #d19a66;
+  --color-syn-fn: #88c0d0;
+  --color-syn-prop: #b48ead;
+  --color-syn-comment: #5c6370;
+  --color-syn-punct: #7a7a78;
+
   /* shadcn/radix component tokens */
   --color-background: #0a0a0b;
   --color-foreground: #ececea;
@@ -47,8 +57,17 @@
   --color-ring: rgba(127, 155, 179, 0.5);
 }
 
+@utility font-wide {
+  font-stretch: 125%;
+}
+
+@utility font-narrow {
+  font-stretch: 75%;
+}
+
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -81,13 +100,17 @@ body::after {
   color: #fff;
 }
 
-* {
-  border-color: var(--color-line);
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-ice-line);
-  outline-offset: 2px;
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-ice-line);
+    outline-offset: 2px;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -103,4 +126,22 @@ body::after {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #323236;
+}
+
+/* underline that draws in on hover */
+.link-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  padding-bottom: 2px;
+  transition:
+    background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s;
+}
+
+.link-line:hover,
+.link-line:focus-visible {
+  background-position: 0% 100%;
+  background-size: 100% 1px;
 }

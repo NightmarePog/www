@@ -1,51 +1,202 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, Trophy, X } from 'lucide-react'
+import { ArrowUpRight, X } from 'lucide-react'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { primaryStack, gameDevStack, exploringStack } from '@/constants/Stacks'
-import highlights from '@/constants/Highlights'
-import { fadeUp, stagger, viewport } from '@/lib/motion'
+import { KW, TY, FN, ST, CM, AN, PL, Line } from '@/components/ui/Code'
+import { EASE, editorLineReveal, viewport } from '@/lib/motion'
 import type { IconButtonProps } from '@/types/IconButton'
 
+type Tech = IconButtonProps
+type CodeLine = { content?: ReactNode; wrap?: boolean }
+
 const STACK_GROUPS = [
-  { label: 'stack.primary', items: primaryStack },
-  { label: 'stack.gamedev', items: gameDevStack },
-  { label: 'stack.exploring', items: exploringStack },
+  { name: 'daily', items: primaryStack, perLine: 3 },
+  { name: 'games', items: gameDevStack, perLine: 4 },
+  { name: 'learning', items: exploringStack, perLine: 4 },
 ]
 
-const TechChip = ({
-  item,
-  selected,
-  onSelect,
-}: {
-  item: IconButtonProps
-  selected: boolean
-  onSelect: (item: IconButtonProps) => void
-}) => {
-  const Icon = item.icon
-  return (
-    <button
-      type="button"
-      aria-pressed={selected}
-      title={`Show projects made with ${item.name}`}
-      onClick={() => onSelect(item)}
-      className={`group inline-flex cursor-pointer items-center gap-2 rounded-md border px-3 py-1.5 transition-all duration-200 hover:-translate-y-0.5 ${
-        selected
-          ? 'border-ice-line bg-ice-soft text-ice'
-          : 'border-line bg-surface-2 hover:border-line-strong'
-      }`}
-    >
-      <Icon
-        className={`size-4 transition-colors ${selected ? 'text-ice' : 'text-ink-muted group-hover:text-ink'}`}
-      />
-      <span
-        className={`font-mono text-xs transition-colors ${selected ? 'text-ice' : 'text-ink-muted group-hover:text-ink'}`}
-      >
-        {item.name}
-      </span>
-    </button>
+const chunk = <T,>(items: T[], size: number) =>
+  Array.from({ length: Math.ceil(items.length / size) }, (_, i) =>
+    items.slice(i * size, i * size + size)
   )
+
+// A string literal in stack.ts that opens the technology dialog
+const TechToken = ({ item, onSelect }: { item: Tech; onSelect: (item: Tech) => void }) => (
+  <button
+    type="button"
+    onClick={() => onSelect(item)}
+    title={`Where I used ${item.name}`}
+    className="text-syn-str decoration-syn-str/40 hover:bg-ice-soft hover:text-ice hover:decoration-ice cursor-pointer underline decoration-dotted underline-offset-4 transition-colors"
+  >
+    "{item.name}"
+  </button>
+)
+
+const aboutLines: CodeLine[] = [
+  {
+    content: (
+      <span className="bg-ink text-bg px-1.5 py-0.5 font-semibold tracking-wide"># LUKÁŠ ERL</span>
+    ),
+  },
+  {},
+  {
+    wrap: true,
+    content: (
+      <>
+        <KW>&gt; </KW>
+        <AN>NightmarePog on most of the internet.</AN>
+      </>
+    ),
+  },
+  {
+    wrap: true,
+    content: (
+      <>
+        <KW>&gt; </KW>
+        <AN>19, still in school.</AN>
+      </>
+    ),
+  },
+  {},
+  {
+    wrap: true,
+    content: (
+      <span className="text-ink-muted">
+        Most of my time goes into full-stack web apps and multiplayer Roblox games written in
+        TypeScript. On the side I play security competitions and made the national finals of
+        Kybersoutěž and HAXAGON Skirmish in 2026.
+      </span>
+    ),
+  },
+  {},
+  {
+    wrap: true,
+    content: (
+      <span className="text-ink-muted">
+        Right now I'm building <PL>**</PL>
+        <span className="text-syn-kw font-semibold">Generic Train Game</span>
+        <PL>**</PL>, a Roblox railway game with drivable trains, signals and passengers, written in
+        roblox-ts with Flamework.
+      </span>
+    ),
+  },
+  {},
+  { content: <KW>## now</KW> },
+  ...[
+    { done: true, text: 'national finals, Kybersoutěž + HAXAGON Skirmish' },
+    { done: true, text: 'first library on Maven Central (Kord Annotations)' },
+    { done: false, text: 'ship Generic Train Game' },
+    { done: false, text: 'finish Purr' },
+  ].map(
+    ({ done, text }): CodeLine => ({
+      wrap: true,
+      content: (
+        <>
+          <PL>- </PL>
+          {done ? (
+            <span className="text-syn-str font-semibold">[x]</span>
+          ) : (
+            <span className="text-syn-punct">[ ]</span>
+          )}{' '}
+          <span className={done ? 'text-ink-muted' : 'text-ink'}>{text}</span>
+        </>
+      ),
+    })
+  ),
+]
+
+const stackLines = (onSelect: (item: Tech) => void): CodeLine[] =>
+  [
+    {
+      content: (
+        <>
+          <KW>import type</KW> <PL>{'{ '}</PL>
+          <TY>Tech</TY>
+          <PL>{' }'}</PL> <KW>from</KW> <ST>"./me"</ST>
+          <PL>;</PL>
+        </>
+      ),
+    },
+    {},
+    { content: <CM>// click a name to see where I used it</CM> },
+    ...STACK_GROUPS.flatMap((group): CodeLine[] => [
+      {
+        content: (
+          <>
+            <KW>export const</KW> <FN>{group.name}</FN>
+            <PL>: </PL>
+            <TY>Tech</TY>
+            <PL>[] = [</PL>
+          </>
+        ),
+      },
+      ...chunk(group.items, group.perLine).map((row) => ({
+        content: (
+          <span className="pl-5">
+            {row.map((item) => (
+              <span key={item.name}>
+                <TechToken item={item} onSelect={onSelect} />
+                <PL>, </PL>
+              </span>
+            ))}
+          </span>
+        ),
+      })),
+      { content: <PL>];</PL> },
+      {},
+    ]),
+  ].slice(0, -1)
+
+const lineIn = {
+  visible: { transition: { staggerChildren: 0.035, delayChildren: 0.2 } },
 }
+
+const Pane = ({
+  filename,
+  language,
+  lines,
+  cursor = false,
+}: {
+  filename: string
+  language: string
+  lines: CodeLine[]
+  cursor?: boolean
+}) => (
+  <div className="min-w-0">
+    <div className="border-line bg-surface flex h-9 items-stretch justify-between border-b">
+      <div className="border-line bg-editor -mb-px flex items-center gap-2 border-r px-4">
+        <span className="bg-ice size-1.5 rounded-full" />
+        <span className="text-ink-muted font-mono text-xs">{filename}</span>
+      </div>
+      <span className="text-ink-faint flex items-center px-4 font-mono text-[10px] tracking-[0.15em] uppercase">
+        {language}
+      </span>
+    </div>
+    <motion.div
+      className="overflow-x-auto py-4"
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      variants={lineIn}
+    >
+      {lines.map((line, i) => (
+        <motion.div key={i} variants={editorLineReveal}>
+          <Line n={i + 1} wrap={line.wrap}>
+            {line.content}
+            {cursor && i === lines.length - 1 && (
+              <motion.span
+                className="bg-ink ml-1 inline-block h-[1.1em] w-[7px] align-middle"
+                animate={{ opacity: [1, 1, 0, 0] }}
+                transition={{ repeat: Infinity, duration: 1, times: [0, 0.5, 0.5, 1] }}
+              />
+            )}
+          </Line>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+)
 
 export const AboutSection = () => {
   const [selectedTech, setSelectedTech] = useState<IconButtonProps | null>(null)
@@ -69,91 +220,46 @@ export const AboutSection = () => {
 
   return (
     <>
-      <section id="about" className="border-line border-t px-6 py-28">
-        <div className="mx-auto max-w-6xl">
-          <SectionHeading eyebrow="// about" title="Who I am" />
+      <section id="about" className="px-6 pt-20 pb-28 md:pt-28 md:pb-36">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading title="About" />
 
-          <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-              variants={stagger}
-            >
-              <motion.p variants={fadeUp} className="text-ink-muted mb-5 text-lg leading-relaxed">
-                I'm Lukáš Erl, also known online as{' '}
-                <span className="text-ink font-medium">NightmarePog</span>. A 19-year-old student at
-                SOŠE Hluboká nad Vltavou, Czech Republic.
-              </motion.p>
-              <motion.p variants={fadeUp} className="text-ink-muted mb-5 text-lg leading-relaxed">
-                I work across web and game development, with a recent focus on Kotlin tooling and
-                Linux systems. I built{' '}
-                <span className="text-ink font-medium">Kord Annotations</span>, a compile-time
-                command framework with KSP code generation, Gradle integration, and Spring Boot
-                support.
-              </motion.p>
-              <motion.p variants={fadeUp} className="text-ink-muted mb-8 text-lg leading-relaxed">
-                I learn by shipping projects, documenting decisions, and working through real
-                technical constraints with a team.
-              </motion.p>
-
-              <div className="flex flex-wrap gap-3">
-                {highlights.map((item) => (
-                  <motion.a
-                    key={item.name}
-                    variants={fadeUp}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-line bg-surface hover:border-ice-line inline-flex items-center gap-3 rounded-md border px-4 py-3 transition-colors"
-                  >
-                    <Trophy className="text-ice size-4 shrink-0" />
-                    <span className="text-ink text-sm">
-                      <span className="font-medium">{item.name}</span>
-                      <span className="text-ink-muted"> — {item.highlightDescription}</span>
-                    </span>
-                  </motion.a>
-                ))}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewport}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="border-line-strong bg-editor overflow-hidden border shadow-[0_24px_60px_-12px_rgba(0,0,0,0.8)]"
+          >
+            <div className="border-line bg-surface flex h-10 items-center gap-3 border-b px-4">
+              <div className="flex gap-1.5">
+                <span className="border-line-strong size-2.5 rounded-full border" />
+                <span className="border-line-strong size-2.5 rounded-full border" />
+                <span className="border-line-strong size-2.5 rounded-full border" />
               </div>
-            </motion.div>
+              <span className="text-ink-faint mx-auto pr-12 font-mono text-[11px]">
+                ~/nightmarepog/about
+              </span>
+            </div>
 
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-              variants={stagger}
-              className="flex flex-col gap-4"
-            >
-              {STACK_GROUPS.map((group) => (
-                <motion.div
-                  key={group.label}
-                  variants={fadeUp}
-                  className="border-line bg-surface rounded-lg border p-5"
-                >
-                  <p className="text-ink-faint mb-4 font-mono text-[11px] tracking-[0.25em] uppercase">
-                    {group.label}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <TechChip
-                        key={item.name}
-                        item={item}
-                        selected={selectedTech?.name === item.name}
-                        onSelect={setSelectedTech}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+            <div className="divide-line grid divide-y lg:grid-cols-[1.2fr_1fr] lg:divide-x lg:divide-y-0">
+              <Pane filename="about.md" language="Markdown" lines={aboutLines} />
+              <Pane
+                filename="stack.ts"
+                language="TypeScript"
+                lines={stackLines(setSelectedTech)}
+                cursor
+              />
+            </div>
 
-              <motion.p
-                variants={fadeUp}
-                className="text-ink-faint px-1 font-mono text-[10px] tracking-[0.14em]"
-              >
-                Select a technology to see what I built with it.
-              </motion.p>
-            </motion.div>
-          </div>
+            <div className="border-line bg-surface text-ink-faint flex h-7 items-center justify-between border-t px-4 font-mono text-[10px]">
+              <div className="flex items-center gap-3">
+                <span className="text-ice">⎇ main*</span>
+                <span>UTF-8</span>
+              </div>
+              <span>2 files · 0 problems</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -163,8 +269,8 @@ export const AboutSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
-            className="fixed inset-0 z-[100] flex cursor-pointer items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex cursor-pointer items-end justify-center bg-black/80 p-4 backdrop-blur-sm sm:items-center"
             onClick={() => setSelectedTech(null)}
           >
             <motion.div
@@ -172,33 +278,29 @@ export const AboutSection = () => {
               aria-modal="true"
               aria-labelledby="technology-dialog-title"
               aria-describedby="technology-dialog-description"
-              initial={{ opacity: 0, y: 16, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.98 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ duration: 0.35, ease: EASE }}
               onClick={(event) => event.stopPropagation()}
-              className="border-line-strong bg-surface w-full max-w-lg cursor-default rounded-xl border p-6 shadow-[0_30px_100px_-30px_rgba(0,0,0,0.95)] md:p-7"
+              className="border-line-strong bg-surface w-full max-w-lg cursor-default border p-6 md:p-8"
             >
-              <div className="mb-4 flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <span className="border-ice-line bg-ice-soft flex size-10 items-center justify-center rounded-lg border">
-                    <selectedTech.icon className="text-ice size-5" />
-                  </span>
-                  <div>
-                    <p className="text-ink-faint font-mono text-[9px] tracking-[0.2em] uppercase">
-                      Technology
-                    </p>
-                    <h3 id="technology-dialog-title" className="text-ink text-xl font-semibold">
-                      {selectedTech.name}
-                    </h3>
-                  </div>
+              <div className="mb-6 flex items-start justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <selectedTech.icon className="text-ice size-6" />
+                  <h3
+                    id="technology-dialog-title"
+                    className="font-wide text-ink text-xl font-bold tracking-tight uppercase"
+                  >
+                    {selectedTech.name}
+                  </h3>
                 </div>
                 <button
                   type="button"
                   autoFocus
-                  aria-label="Close technology details"
+                  aria-label="Close"
                   onClick={() => setSelectedTech(null)}
-                  className="text-ink-faint hover:bg-surface-2 hover:text-ink cursor-pointer rounded-md p-2 transition-colors"
+                  className="text-ink-faint hover:text-ink -m-2 cursor-pointer p-2 transition-colors"
                 >
                   <X className="size-4" />
                 </button>
@@ -208,32 +310,28 @@ export const AboutSection = () => {
                 {selectedTech.description}
               </p>
 
-              <p className="text-ink-faint mt-6 mb-3 font-mono text-[10px] tracking-[0.2em] uppercase">
-                Projects made with it
+              <p className="text-ink-faint mt-8 mb-2 font-mono text-[11px] tracking-[0.2em] uppercase">
+                Used in
               </p>
-              <div className="flex flex-wrap gap-2">
-                {selectedTech.projects.map((project) =>
-                  project.link ? (
-                    <a
-                      key={project.name}
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border-line bg-surface-2 text-ink-muted hover:border-line-strong hover:text-ice inline-flex cursor-pointer items-center gap-1.5 rounded-md border px-3 py-2 text-sm transition-colors"
-                    >
-                      {project.name}
-                      <ArrowUpRight className="size-3.5" />
-                    </a>
-                  ) : (
-                    <span
-                      key={project.name}
-                      className="border-line bg-surface-2 text-ink-muted rounded-md border px-3 py-2 text-sm"
-                    >
-                      {project.name}
-                    </span>
-                  )
-                )}
-              </div>
+              <ul className="border-line border-t">
+                {selectedTech.projects.map((project) => (
+                  <li key={project.name} className="border-line border-b">
+                    {project.link ? (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group text-ink-muted hover:text-ink flex items-center justify-between py-2.5 text-sm transition-colors"
+                      >
+                        {project.name}
+                        <ArrowUpRight className="group-hover:text-ice size-3.5 transition-colors" />
+                      </a>
+                    ) : (
+                      <span className="text-ink-muted block py-2.5 text-sm">{project.name}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           </motion.div>
         )}

@@ -1,119 +1,77 @@
-import { motion } from 'framer-motion'
-import {
-  ArrowUpRight,
-  Blocks,
-  ClipboardCheck,
-  Cpu,
-  PackageOpen,
-  PackageSearch,
-  TrainFront,
-} from 'lucide-react'
-import { fadeUp } from '@/lib/motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { ArrowUpRight } from 'lucide-react'
+import type { Project } from '@/constants/Projects'
+import { EASE, viewport } from '@/lib/motion'
 
-export interface ProjectData {
-  name: string
-  description: string
-  link: string
-  icon: 'framework' | 'quiz' | 'package-manager' | 'railway' | 'inventory' | 'cpu'
-  status: 'Released' | 'Completed' | 'In development' | 'Unfinished' | 'Learning project'
-  version?: string
-  tags: string[]
-  features: string[]
+const SPAN: Record<Project['size'], string> = {
+  large: 'md:col-span-7',
+  small: 'md:col-span-5',
+  half: 'md:col-span-6',
 }
 
-const PROJECT_ICONS = {
-  framework: Blocks,
-  quiz: ClipboardCheck,
-  'package-manager': PackageSearch,
-  railway: TrainFront,
-  inventory: PackageOpen,
-  cpu: Cpu,
-}
-
-const STATUS_STYLES: Record<ProjectData['status'], string> = {
-  Released: 'border-ice-line bg-ice-soft text-ice',
-  Completed: 'border-line-strong bg-surface-2 text-ink-muted',
-  'In development': 'border-ice-line bg-ice-soft text-ice',
-  Unfinished: 'border-line bg-bg text-ink-faint',
-  'Learning project': 'border-line bg-bg text-ink-faint',
-}
-
-const Tag = ({ children }: { children: string }) => (
-  <span className="text-ink-muted border-line rounded-sm border px-2 py-1 font-mono text-[10px] tracking-[0.15em] uppercase">
-    {children}
-  </span>
-)
-
-export const ProjectCard = ({
-  project,
-  featured = false,
-}: {
-  project: ProjectData
-  featured?: boolean
-}) => {
-  const Icon = PROJECT_ICONS[project.icon]
+export const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const ref = useRef<HTMLAnchorElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const imageY = useTransform(scrollYProgress, [0, 1], ['-3%', '3%'])
 
   return (
     <motion.a
-      variants={fadeUp}
+      ref={ref}
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group border-line bg-surface hover:border-line-strong relative flex flex-col overflow-hidden rounded-lg border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] ${featured ? 'md:grid md:grid-cols-[1.15fr_1fr]' : ''}`}
+      className={`group col-span-12 block self-start ${SPAN[project.size]}`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
     >
-      <div
-        className={`border-line bg-surface-2 relative flex min-h-44 items-center justify-center overflow-hidden ${featured ? 'border-b md:min-h-72 md:border-r md:border-b-0' : 'border-b'}`}
+      <motion.div
+        className={`bg-surface-2 border-line relative aspect-[16/10] overflow-hidden border`}
+        variants={{
+          hidden: { clipPath: 'inset(100% 0% 0% 0%)' },
+          visible: { clipPath: 'inset(0% 0% 0% 0%)', transition: { duration: 1.1, ease: EASE } },
+        }}
       >
-        <div className="bg-ice-soft absolute size-40 rounded-full blur-3xl transition-transform duration-500 group-hover:scale-125" />
-        <div className="absolute top-4 right-4 left-4 flex items-center justify-between gap-3">
-          <span
-            className={`rounded-full border px-2.5 py-1 font-mono text-[9px] tracking-[0.14em] uppercase ${STATUS_STYLES[project.status]}`}
-          >
-            {project.status}
-          </span>
-          {project.version && (
-            <span className="border-line bg-bg/70 text-ink-muted rounded-full border px-2.5 py-1 font-mono text-[9px] tracking-[0.14em] uppercase backdrop-blur-sm">
-              {project.version}
-            </span>
-          )}
-        </div>
-        <Icon
-          aria-hidden
-          strokeWidth={1.15}
-          className={`text-ink-muted group-hover:text-ice relative transition-all duration-300 group-hover:-translate-y-1 ${featured ? 'size-24 md:size-32' : 'size-20'}`}
-        />
-        <span className="text-ink-faint absolute right-4 bottom-3 font-mono text-[9px] tracking-[0.2em] uppercase">
-          {project.tags[0]}
+        <motion.div style={{ y: imageY }} className="absolute inset-0 scale-[1.07]">
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            loading="lazy"
+            className="h-full w-full object-cover grayscale-[0.85] transition-[filter,scale] duration-700 ease-out group-hover:scale-[1.03] group-hover:grayscale-0"
+          />
+        </motion.div>
+        <span className="bg-bg/80 text-ink-muted absolute top-3 left-3 z-10 px-2 py-1 font-mono text-[10px] tracking-[0.15em] uppercase backdrop-blur-sm">
+          {project.status}
+          {project.version && <span className="text-ink-faint"> · {project.version}</span>}
         </span>
-      </div>
+      </motion.div>
 
-      <div className={`flex flex-col p-6 ${featured ? 'justify-center md:p-8' : ''}`}>
-        <div className="mb-3 flex items-start justify-between gap-3">
+      <motion.div
+        className="mt-5 grid grid-cols-[auto_1fr_auto] gap-x-4"
+        variants={{
+          hidden: { opacity: 0, y: 16 },
+          visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE, delay: 0.25 } },
+        }}
+      >
+        <span className="text-ink-faint pt-1.5 font-mono text-[11px] tabular-nums">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div>
           <h3
-            className={`text-ink font-semibold tracking-tight ${featured ? 'text-2xl' : 'text-lg'}`}
+            className={`font-wide text-ink group-hover:text-ice font-bold tracking-tight uppercase transition-colors ${
+              project.size === 'large' ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'
+            }`}
           >
             {project.name}
           </h3>
-          <ArrowUpRight className="text-ink-faint group-hover:text-ice mt-1 size-4 shrink-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <p className="text-ink-muted mt-2 max-w-xl text-sm leading-relaxed md:text-base">
+            {project.description}
+          </p>
+          <p className="text-ink-faint mt-3 font-mono text-[11px]">{project.tags.join(' / ')}</p>
         </div>
-
-        <p className="text-ink-muted mb-5 text-sm leading-relaxed">{project.description}</p>
-
-        <ul className="mb-6 space-y-1.5">
-          {(featured ? project.features : project.features.slice(0, 2)).map((f) => (
-            <li key={f} className="text-ink-muted flex items-center gap-2.5 text-sm">
-              <span className="bg-ice size-1 shrink-0 rounded-full" />
-              {f}
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-auto flex flex-wrap gap-1.5">
-          {project.tags.map((t) => (
-            <Tag key={t}>{t}</Tag>
-          ))}
-        </div>
-      </div>
+        <ArrowUpRight className="text-ink-faint group-hover:text-ice mt-1.5 size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </motion.div>
     </motion.a>
   )
 }

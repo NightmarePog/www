@@ -1,102 +1,84 @@
-interface Project {
+export interface Project {
   name: string
   description: string
   link: string
-  icon: 'framework' | 'quiz' | 'package-manager' | 'railway' | 'inventory' | 'cpu'
-  status: 'Released' | 'Completed' | 'In development' | 'Unfinished' | 'Learning project'
+  image: string
+  imageAlt: string
+  status: 'Released' | 'In development' | 'Unfinished' | 'Learning project'
   version?: string
   tags: string[]
-  features: string[]
+  // Grid span on desktop; drives the editorial layout of the projects section
+  size: 'large' | 'small' | 'half'
 }
 
 export const Projects: Project[] = [
   {
-    name: 'Kord Annotations',
+    name: 'Generic Train Game',
     description:
-      'Annotation-first Kotlin framework that generates Discord command metadata and dispatch code at compile time.',
-    link: 'https://github.com/NightmarePog/kord-annotations',
-    icon: 'framework',
-    status: 'Released',
-    version: 'v0.2.0',
-    tags: ['Kotlin', 'KSP', 'Gradle', 'Discord'],
-    features: [
-      'Compile-time code generation',
-      'Gradle plugin',
-      'Spring Boot integration',
-      'Testkit',
-    ],
+      'Roblox railway game about driving trains, working signals, and moving passengers across a growing network.',
+    link: 'https://www.roblox.com/games/113961418864058/Generic-train-game',
+    image: '/projects/gtg-1.webp',
+    imageAlt: 'A red brick-built railcar on the tracks at sunset in Generic Train Game',
+    status: 'In development',
+    version: 'Alpha',
+    tags: ['Roblox', 'TypeScript', 'Flamework', 'React'],
+    size: 'large',
   },
   {
     name: 'Curtis',
     description:
-      'Full-stack quiz platform that started from a task set by my teacher: build a practical alternative to Microsoft Teams quizzes.',
+      'Quiz platform for teachers and students. It started as a school assignment: build something better than quizzes in Microsoft Teams.',
     link: 'https://github.com/NightmarePog/Curtis',
-    icon: 'quiz',
+    image: '/projects/curtis-1.webp',
+    imageAlt: 'Screenshot of the Curtis web app',
     status: 'In development',
     version: 'MVP',
     tags: ['Java', 'Spring', 'Next.js', 'PostgreSQL'],
-    features: [
-      'Teacher and student workflows',
-      'Microsoft Entra ID authentication',
-      'Automatic evaluation and live quiz sessions',
-    ],
+    size: 'small',
   },
   {
     name: 'Purr',
     description:
-      'Unfinished AUR package manager written in Rust, exploring dependency resolution, isolated builds, and safer application launching.',
+      'AUR package manager in Rust. It plans dependencies and builds packages in isolation.',
     link: 'https://github.com/NightmarePog/Purr',
-    icon: 'package-manager',
+    image: '/projects/purr.webp',
+    imageAlt: 'Terminal output from the Purr command-line tool',
     status: 'In development',
     version: 'v0.1.0-dev',
-    tags: ['Rust', 'Arch Linux', 'AUR', 'CLI'],
-    features: [
-      'AUR metadata and dependency planning',
-      'Isolated package build flow',
-      'Install, remove, and run commands still in development',
-    ],
+    tags: ['Rust', 'Arch Linux', 'CLI'],
+    size: 'small',
   },
   {
-    name: 'Generic Train Game',
+    name: 'Kord Annotations',
     description:
-      'Playable Roblox railway game focused on driving, signalling, passengers, and operating a growing network.',
-    link: 'https://www.roblox.com/games/113961418864058/Generic-train-game',
-    icon: 'railway',
-    status: 'In development',
-    version: 'Alpha',
-    tags: ['Roblox', 'TypeScript', 'Flamework', 'React'],
-    features: [
-      'Driveable trains and cab controls',
-      'Signalling and passenger systems',
-      'Server-authoritative multiplayer gameplay',
-    ],
+      'Kotlin framework for Discord bots. You annotate functions, and KSP generates the command metadata and dispatch code at compile time.',
+    link: 'https://github.com/NightmarePog/kord-annotations',
+    image: '/projects/kord.webp',
+    imageAlt: 'An annotated Discord command written with Kord Annotations',
+    status: 'Released',
+    version: 'v0.2.0',
+    tags: ['Kotlin', 'KSP', 'Gradle', 'Spring Boot'],
+    size: 'large',
   },
   {
     name: 'Flamework Hotbar',
-    description:
-      'Expandable Roblox inventory and hotbar UI prototype built with roblox-ts, Flamework, and React.',
+    description: 'Prototype of an expandable Roblox inventory and hotbar UI.',
     link: 'https://github.com/NightmarePog/Flamework-Hotbar',
-    icon: 'inventory',
+    image: '/projects/hotbar.webp',
+    imageAlt: 'Flamework Hotbar UI assets',
     status: 'Unfinished',
-    tags: ['Roblox', 'TypeScript', 'Flamework', 'UI'],
-    features: [
-      'Slot-based interface foundation',
-      'Component-oriented structure',
-      'Core functionality and documentation remain incomplete',
-    ],
+    tags: ['Roblox', 'TypeScript', 'React'],
+    size: 'half',
   },
   {
     name: 'LArch8',
     description:
-      'An early C learning project exploring a small 8-bit architecture, assembler, and CPU interpreter.',
+      'My first C project: a made-up 8-bit architecture with an assembler and an interpreter.',
     link: 'https://github.com/NightmarePog/LArch8',
-    icon: 'cpu',
+    image: '/projects/larch8.webp',
+    imageAlt: 'LArch8 assembling and running a program in the terminal',
     status: 'Learning project',
-    tags: ['C', 'Interpreter', 'Assembler', '8-bit'],
-    features: [
-      'Assembly-to-bytecode pipeline',
-      'Custom object-file format',
-      'Small interpreter runtime',
-    ],
+    tags: ['C', 'Assembler', 'Interpreter'],
+    size: 'half',
   },
 ]

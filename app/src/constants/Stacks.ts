@@ -37,7 +37,7 @@ export const primaryStack: IconButtonProps[] = [
   {
     name: 'TypeScript',
     icon: SiTypescript,
-    description: 'My main language for web interfaces and Roblox game systems.',
+    description: 'What I write most. Web frontends, and Roblox games through roblox-ts.',
     projects: [
       { name: 'Curtis', link: links.curtis },
       { name: 'Generic Train Game', link: links.trainGame },
@@ -48,7 +48,7 @@ export const primaryStack: IconButtonProps[] = [
   {
     name: 'React',
     icon: SiReact,
-    description: 'Used for responsive web interfaces and state-driven Roblox UI.',
+    description: 'Web UIs, and in-game UI for my Roblox projects.',
     projects: [
       { name: 'Curtis', link: links.curtis },
       { name: 'Generic Train Game UI', link: links.trainGame },
@@ -59,25 +59,26 @@ export const primaryStack: IconButtonProps[] = [
   {
     name: 'Next.js',
     icon: SiNextdotjs,
-    description: 'My framework for full-stack React applications with structured routing.',
+    description: 'The frontend of Curtis.',
     projects: [{ name: 'Curtis', link: links.curtis }],
   },
   {
     name: 'Kotlin',
     icon: SiKotlin,
-    description: 'Used for libraries, compile-time tooling, and JVM backend development.',
+    description: 'Kord Annotations is written in it, KSP processor included.',
     projects: [{ name: 'Kord Annotations', link: links.kord }],
   },
   {
     name: 'Java',
     icon: SiOpenjdk,
-    description: 'Used for backend services and REST APIs on the JVM.',
+    description: 'The Curtis backend.',
     projects: [{ name: 'Curtis backend', link: links.curtis }],
   },
   {
     name: 'Spring',
     icon: SiSpring,
-    description: 'Used for authenticated APIs, persistence, validation, and application services.',
+    description:
+      'The Curtis REST API runs on Spring Boot, and Kord Annotations ships a Spring integration.',
     projects: [
       { name: 'Curtis backend', link: links.curtis },
       { name: 'Kord Annotations integration', link: links.kord },
@@ -86,7 +87,7 @@ export const primaryStack: IconButtonProps[] = [
   {
     name: 'Gradle',
     icon: SiGradle,
-    description: 'Used to structure, test, and publish multi-module JVM projects.',
+    description: 'Builds and publishes the multi-module Kord Annotations project.',
     projects: [
       { name: 'Kord Annotations', link: links.kord },
       { name: 'Curtis backend', link: links.curtis },
@@ -95,7 +96,7 @@ export const primaryStack: IconButtonProps[] = [
   {
     name: 'Git',
     icon: SiGit,
-    description: 'The version-control foundation for my personal and team projects.',
+    description: 'I use it on everything, solo and in teams.',
     projects: [
       { name: 'Kord Annotations', link: links.kord },
       { name: 'Curtis', link: links.curtis },
@@ -105,7 +106,7 @@ export const primaryStack: IconButtonProps[] = [
   {
     name: 'Linux',
     icon: SiLinux,
-    description: 'My daily development environment and the target platform for my systems tooling.',
+    description: 'My daily OS. Purr, my AUR package manager, targets it.',
     projects: [
       { name: 'Purr', link: links.purr },
       { name: 'Dotfiles', link: links.dotfiles },
@@ -117,13 +118,13 @@ export const gameDevStack: IconButtonProps[] = [
   {
     name: 'Godot',
     icon: SiGodotengine,
-    description: 'Used to build and maintain interactive projects during my work at VR Centrum.',
+    description: 'I led a VR game in Godot at VR Centrum.',
     projects: [{ name: 'VR Centrum game projects' }],
   },
   {
     name: 'Roblox Studio',
     icon: SiRobloxstudio,
-    description: 'My main environment for building multiplayer game systems and interfaces.',
+    description: 'Where Generic Train Game gets built.',
     projects: [
       { name: 'Generic Train Game', link: links.trainGame },
       { name: 'Flamework Hotbar', link: links.hotbar },
@@ -132,13 +133,13 @@ export const gameDevStack: IconButtonProps[] = [
   {
     name: 'Blender',
     icon: SiBlender,
-    description: 'Used mainly for creating and preparing models for my game projects.',
+    description: 'I make the models for my games in it.',
     projects: [{ name: 'Generic Train Game assets', link: links.trainGame }],
   },
   {
     name: 'Lua',
     icon: SiLua,
-    description: 'Used for Roblox and ComputerCraft scripting, including generated Luau output.',
+    description: 'Roblox scripting and ComputerCraft programs. roblox-ts compiles to Luau too.',
     projects: [
       { name: 'Generic Train Game', link: links.trainGame },
       { name: 'CCux ComputerCraft', link: links.ccux },
@@ -150,25 +151,25 @@ export const exploringStack: IconButtonProps[] = [
   {
     name: 'Python',
     icon: SiPython,
-    description: 'Some experience from automation, networking, and small tooling projects.',
+    description: 'Small scripts, and an ARP poisoning tool.',
     projects: [{ name: 'ARP Poison Tool', link: links.arpTool }],
   },
   {
     name: 'C',
     icon: SiC,
-    description: 'Some experience from building a small assembler and CPU interpreter.',
+    description: 'LArch8, my first C project: an assembler and a CPU interpreter.',
     projects: [{ name: 'LArch8', link: links.larch8 }],
   },
   {
     name: 'C++',
     icon: SiCplusplus,
-    description: 'Some experience from experimenting with DOOM-style software rendering.',
+    description: 'CROOM, an experiment with DOOM-style software rendering.',
     projects: [{ name: 'CROOM', link: links.croom }],
   },
   {
     name: 'Rust',
     icon: SiRust,
-    description: 'Some experience from developing Linux package-management and sandboxing tools.',
+    description: 'Purr, my AUR package manager.',
     projects: [{ name: 'Purr', link: links.purr }],
   },
 ]

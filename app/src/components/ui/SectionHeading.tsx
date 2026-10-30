@@ -1,48 +1,38 @@
 import { motion } from 'framer-motion'
-import { EASE, viewport } from '@/lib/motion'
+import { drawLine, maskUp, viewport } from '@/lib/motion'
 
 interface SectionHeadingProps {
-  eyebrow: string
   title: string
-  align?: 'left' | 'center'
+  aside?: string
 }
 
-export const SectionHeading = ({ eyebrow, title, align = 'left' }: SectionHeadingProps) => (
-  <motion.div
-    className={`mb-14 ${align === 'center' ? 'text-center' : ''}`}
+export const SectionHeading = ({ title, aside }: SectionHeadingProps) => (
+  <motion.header
+    className="mb-16 md:mb-20"
     initial="hidden"
     whileInView="visible"
     viewport={viewport}
-    variants={{
-      hidden: {},
-      visible: { transition: { staggerChildren: 0.12 } },
-    }}
+    variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
   >
-    <motion.p
-      className="font-mono text-xs tracking-[0.2em] text-ink-faint mb-4"
-      variants={{
-        hidden: { opacity: 0, y: 12 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
-      }}
-    >
-      {eyebrow}
-    </motion.p>
-    <motion.h2
-      className="text-3xl md:text-4xl font-semibold tracking-tight text-ink uppercase"
-      variants={{
-        hidden: { opacity: 0, y: 12 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
-      }}
-    >
-      {title}
-    </motion.h2>
-    <motion.div
-      className={`h-px w-16 bg-ink/40 mt-6 ${align === 'center' ? 'mx-auto' : ''}`}
-      style={{ originX: align === 'center' ? 0.5 : 0 }}
-      variants={{
-        hidden: { scaleX: 0 },
-        visible: { scaleX: 1, transition: { duration: 0.7, ease: EASE } },
-      }}
-    />
-  </motion.div>
+    <motion.div variants={drawLine} className="bg-line-strong mb-6 h-px origin-left" />
+    <div className="flex items-end justify-between gap-6">
+      <div className="flex items-baseline gap-5">
+        <span className="block overflow-hidden pb-1">
+          <motion.h2
+            variants={maskUp}
+            className="font-wide text-ink text-4xl leading-none font-bold tracking-tight uppercase md:text-6xl"
+          >
+            {title}
+          </motion.h2>
+        </span>
+      </div>
+      {aside && (
+        <span className="hidden overflow-hidden pb-1 md:block">
+          <motion.p variants={maskUp} className="text-ink-faint font-mono text-xs">
+            {aside}
+          </motion.p>
+        </span>
+      )}
+    </div>
+  </motion.header>
 )

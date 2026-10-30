@@ -1,69 +1,98 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, useMotionValueEvent, useScroll, useSpring } from 'framer-motion'
 import useIsMobile from '@/hook/useIsMobile'
 import { Menu } from './Menu'
 import { NAV, scrollToAnchor } from '@/constants/Nav'
+import { EASE } from '@/lib/motion'
 
 const Navbar = () => {
   const isMobile = useIsMobile()
-  const [active, setActive] = useState('hero')
+  const [active, setActive] = useState<string | null>(null)
+  const [hidden, setHidden] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { scrollY, scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40 })
+
+  // Hide while scrolling down, reveal on any upward scroll
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const previous = scrollY.getPrevious() ?? 0
+    setHidden(y > previous && y > 240)
+    setScrolled(y > 24)
+  })
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
-    NAV.forEach(({ anchor }) => {
-      const el = document.getElementById(anchor)
-      if (!el) return
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(anchor) },
-        { threshold: 0.35 },
-      )
-      obs.observe(el)
-      observers.push(obs)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    )
+    ;['hero', ...NAV.map((n) => n.anchor)].forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
     })
-    return () => observers.forEach((o) => o.disconnect())
+    return () => observer.disconnect()
   }, [])
 
   return (
-    <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
-      <motion.nav
-        className="flex items-center gap-1 px-2 py-1.5 rounded-md border border-line-strong bg-bg/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+    <motion.header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
+        scrolled ? 'bg-bg/85 border-line backdrop-blur-md' : 'border-transparent'
+      }`}
+      initial={{ y: -64 }}
+      animate={{ y: hidden ? -64 : 0 }}
+      transition={{ duration: 0.45, ease: EASE }}
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <button
           onClick={() => scrollToAnchor('hero')}
           aria-label="Back to top"
-          className="px-2 cursor-pointer"
+          className="group flex cursor-pointer items-center gap-3"
         >
-          <img src="/NightmareLogo.svg" alt="NightmarePog logo" className="size-6" />
+          <img
+            src="/NightmareLogo.svg"
+            alt=""
+            className="size-6 transition-transform duration-500 group-hover:-rotate-12"
+          />
+          <span className="text-ink font-mono text-xs tracking-[0.2em] uppercase">Lukáš Erl</span>
         </button>
+
         {isMobile ? (
           <Menu />
         ) : (
-          NAV.map(({ title, anchor }) => {
-            const isActive = active === anchor
-            return (
-              <button
-                key={anchor}
-                onClick={() => scrollToAnchor(anchor)}
-                className={`relative px-4 py-1.5 rounded-sm font-mono text-[11px] uppercase tracking-[0.2em] transition-colors duration-200 cursor-pointer
-                  ${isActive ? 'text-bg' : 'text-ink-muted hover:text-ink'}`}
-              >
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-active"
-                    className="absolute inset-0 rounded-sm bg-ink"
-                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
-                  />
-                )}
-                <span className="relative z-10">{title}</span>
-              </button>
-            )
-          })
+          <nav className="flex items-center gap-8">
+            {NAV.map(({ title, anchor }) => {
+              const isActive = active === anchor
+              return (
+                <button
+                  key={anchor}
+                  onClick={() => scrollToAnchor(anchor)}
+                  className={`group relative flex cursor-pointer items-baseline gap-1.5 font-mono text-xs tracking-[0.15em] uppercase transition-colors duration-200 ${
+                    isActive ? 'text-ink' : 'text-ink-muted hover:text-ink'
+                  }`}
+                >
+                  {title}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="bg-ice absolute -bottom-2 left-0 h-px w-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 34 }}
+                    />
+                  )}
+                </button>
+              )
+            })}
+          </nav>
         )}
-      </motion.nav>
-    </div>
+      </div>
+      <motion.div
+        aria-hidden
+        className="bg-ice/60 absolute bottom-0 left-0 h-px w-full origin-left"
+        style={{ scaleX: progress }}
+      />
+    </motion.header>
   )
 }
 

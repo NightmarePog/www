@@ -7,15 +7,27 @@ export const fadeUp: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: EASE },
+    transition: { duration: 0.7, ease: EASE },
   },
 }
 
 export const stagger: Variants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.07, delayChildren: 0.1 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
   },
+}
+
+// Text slides up from behind a clipping mask
+export const maskUp: Variants = {
+  hidden: { y: '110%' },
+  visible: { y: '0%', transition: { duration: 0.9, ease: EASE } },
+}
+
+// Hairline rule that draws in from the left
+export const drawLine: Variants = {
+  hidden: { scaleX: 0 },
+  visible: { scaleX: 1, transition: { duration: 1.1, ease: EASE } },
 }
 
 export const viewport = { once: true, amount: 0.2 } as const
