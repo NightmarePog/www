@@ -74,7 +74,7 @@ const aboutLines: CodeLine[] = [
     wrap: true,
     content: (
       <span className="text-ink-muted">
-        Right now I'm building <PL>**</PL>
+        I made <PL>**</PL>
         <span className="text-syn-kw font-semibold">Generic Train Game</span>
         <PL>**</PL>, a Roblox railway game with drivable trains, signals and passengers, written in
         roblox-ts with Flamework.
@@ -86,8 +86,9 @@ const aboutLines: CodeLine[] = [
   ...[
     { done: true, text: 'national finals, Kybersoutěž + HAXAGON Skirmish' },
     { done: true, text: 'first library on Maven Central (Kord Annotations)' },
-    { done: false, text: 'ship Generic Train Game' },
+    { done: true, text: 'ship Generic Train Game' },
     { done: false, text: 'finish Purr' },
+    { done: false, text: 'say hiii to you :3' },
   ].map(
     ({ done, text }): CodeLine => ({
       wrap: true,
